@@ -3,6 +3,6 @@ from .import views
 
 
 urlpatterns = [
-    path('', views.get_students, name='get_students'),
-    path('json/', views.get_students_json, name='get_students_json'),
+    path('', views.students, name='students'),
+    path('students/<int:pk>/', views.student_detail, name='student_detail'),
 ]
