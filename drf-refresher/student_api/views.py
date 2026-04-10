@@ -21,7 +21,7 @@ def students(request):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-
+        ## If the data is not valid, return the errors with a 400 Bad Request status
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 

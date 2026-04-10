@@ -1,0 +1,45 @@
+
+"""
+DRF ViewSet Overview
+====================
+
+`ViewSet` groups related API actions in one class.
+
+Important:
+- If you extend the base `ViewSet` (non-model viewset), DRF does NOT generate
+	CRUD behavior for you.
+- You must manually implement methods such as `list`, `create`, `retrieve`,
+	`update`, and `destroy`.
+
+1) ViewSet (manual methods required)
+------------------------------------
+Use this when your logic is custom and not tied directly to a Django model.
+
+Example:
+
+		from rest_framework import viewsets
+		from rest_framework.response import Response
+
+		class ProductViewSet(viewsets.ViewSet):
+				def list(self, request):
+						return Response({"message": "List products"})
+
+				def retrieve(self, request, pk=None):
+						return Response({"message": f"Get product {pk}"})
+
+2) ModelViewSet (full CRUD by default)
+--------------------------------------
+Use this when working directly with a Django model.
+
+- Provides default implementations for:
+	`list`, `create`, `retrieve`, `update`, `partial_update`, `destroy`.
+- You typically define `queryset` and `serializer_class` only.
+
+3) ReadOnlyModelViewSet (read-only by default)
+----------------------------------------------
+Use this when clients should only read data.
+
+- Provides only:
+	`list` and `retrieve`.
+- No create/update/delete actions are included.
+"""
