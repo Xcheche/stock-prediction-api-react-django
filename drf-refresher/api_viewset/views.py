@@ -10,6 +10,7 @@ from .serializers import DoctorsSerializer
 
 #View set
 """
+# Non Model view set implementation
 class DoctorsViewSet(viewsets.ViewSet):
     def list(self, request):
         queryset = Doctors.objects.all()

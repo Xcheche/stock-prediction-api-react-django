@@ -20,5 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('students_api/',include('student_api.urls')),
     path('employees/',include('employees.urls')),
+    path('blog_nexted_serializer/',include('blog_nexted_serializer.urls')),
     path('',include('api_viewset.urls')),
 ]

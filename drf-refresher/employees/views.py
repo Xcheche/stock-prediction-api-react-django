@@ -7,19 +7,23 @@ from .serializers import EmployeeSerializer
 from rest_framework import status
 from rest_framework import mixins
 from rest_framework import generics
+from config.paginations import CustomPagination
 # Create your views here.
 
 
 
 #=====CBV ONLY LIST VIEW=====#
-"""
+
 class EmployeeList(APIView):
-  
+
 
     def get(self, request, format=None):
         employees = Employee.objects.all()
-        serializer = EmployeeSerializer(employees, many=True)
-        return Response(serializer.data)
+        # Applying custom pagination to the list of employees
+        pagination_class = CustomPagination()
+        paginated_employees = pagination_class.paginate_queryset(employees, request)
+        serializer = EmployeeSerializer(paginated_employees, many=True)
+        return pagination_class.get_paginated_response(serializer.data)
 
     def post(self, request, format=None):
         serializer = EmployeeSerializer(data=request.data)
@@ -69,8 +73,6 @@ class EmployeeDetail(APIView):
 
 
 
-
-"""
 #------------------------------------------------------------------------------------------------#
 
 #=====MIXINS ONLY LIST VIEW=====#
@@ -113,14 +115,14 @@ class EmployeeDetail(mixins.RetrieveModelMixin,
 
 
 #=====Generics ONLY LIST VIEW=====#
-class EmployeeList(generics.ListCreateAPIView):
-    queryset = Employee.objects.all()
-    serializer_class = EmployeeSerializer
+# class EmployeeList(generics.ListCreateAPIView):
+#     queryset = Employee.objects.all()
+#     serializer_class = EmployeeSerializer
 
 
-#====Generics ONLY DETAIL VIEW=====#
-class EmployeeDetail(generics.RetrieveUpdateDestroyAPIView):
+# #====Generics ONLY DETAIL VIEW=====#
+# class EmployeeDetail(generics.RetrieveUpdateDestroyAPIView):
    
-    queryset = Employee.objects.all()
-    serializer_class = EmployeeSerializer    
-    lookup_field = 'pk'
+#     queryset = Employee.objects.all()
+#     serializer_class = EmployeeSerializer    
+#     lookup_field = 'pk'

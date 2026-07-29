@@ -5,15 +5,20 @@ from student_api.serializers import StudentSerializer
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
+from config.paginations import CustomPagination
 
 #------------------------- View to handle GET and POST requests for Students ---------
 @api_view(["GET", "POST"])
 def students(request):
     # -------- GET all students ----------
     if request.method == "GET":
-        students = Students.objects.all()
-        serializer = StudentSerializer(students, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        all_students = Students.objects.all()
+        serializer = StudentSerializer(all_students, many=True)
+        # Applying custom pagination to the list of students
+        pagination_class = CustomPagination()
+        paginated_students = pagination_class.paginate_queryset(all_students, request)
+        serialized_students = StudentSerializer(paginated_students, many=True).data
+        return pagination_class.get_paginated_response(serialized_students)
 
     # -------- POST / Create student ----------
     elif request.method == "POST":

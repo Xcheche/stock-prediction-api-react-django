@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'student_api',
     'employees',
     'api_viewset',
+    'blog_nexted_serializer',
 ]
 
 MIDDLEWARE = [
@@ -127,3 +128,17 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Django REST Framework settings
+# Global pagination ( Works for only viewsets and generic views, not for APIView)
+"""
+Limit offset pagination is a type of pagination that allows clients to specify a limit (the maximum number of items to return) and an offset (the number of items to skip before starting to collect the result set). This is useful for paginating large datasets in APIs, as it allows clients to retrieve data in smaller chunks rather than all at once.   
+Whereas page number pagination is a type of pagination that allows clients to specify a page number and a page size (the number of items per page). The server then returns the corresponding page of results. This is useful for paginating datasets where the total number of items is known and fixed, as it allows clients to easily navigate through the pages of results.
+"""
+
+    
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 2
+}
