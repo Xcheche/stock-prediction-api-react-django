@@ -1,0 +1,25 @@
+## Custom pagination
+
+- Global pagination: `LimitOffsetPagination` (PAGE_SIZE=2) from `config/settings.py`.
+  Used automatically by **viewsets** and **generic views** — currently in
+  `api_viewset` (DoctorsViewSet) and `blog_nexted_serializer` (Blog/Comment generics).
+- Custom pagination: `CustomPagination` in `config/paginations.py` (PageNumberPagination,
+  page_size=2, page_query_param='page_num', wrapped links/count/results response).
+  Used only with `APIView`, instantiated manually — currently in
+  `employees/views.py` (EmployeeList) and `student_api/views.py`.
+
+
+
+
+## Filtering and Searching
+## There is global filter in settings and custom filter in views. You can use either one of them. If you want to use global filter, 
+you need to install django-filter package. You can install it by running the following command:
+``pip install django-filter``
+## Global filter is mainly used for filtering in viewsets and generics. You can use it by adding the following code in your settings.py file:
+
+## Filter doctors api by designation
+## Filter doctors api by name 
+## Filter doctors by id range
+
+## Custom filter is located in api_viewset/filters.py. You can use it by adding the following code in your views.py file:
+## Global filter was manually applied there too
