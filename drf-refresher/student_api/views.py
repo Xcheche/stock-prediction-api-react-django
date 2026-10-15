@@ -7,7 +7,8 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from config.paginations import CustomPagination
 
-#------------------------- View to handle GET and POST requests for Students ---------
+
+# ------------------------- View to handle GET and POST requests for Students ---------
 @api_view(["GET", "POST"])
 def students(request):
     # -------- GET all students ----------
@@ -30,20 +31,20 @@ def students(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-#-------------------------Detail View to handle GET, PUT, DELETE for a single Student ---------
+# -------------------------Detail View to handle GET, PUT, DELETE for a single Student ---------
 @api_view(["GET", "PUT", "DELETE"])
 def student_detail(request, pk):
-    #----- Fetch the student object by primary key -----
+    # ----- Fetch the student object by primary key -----
     try:
-        students =Students.objects.get(pk=pk)
+        students = Students.objects.get(pk=pk)
     except Students.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     # -------- GET a single student by id ----------
-    if request.method=="GET":
+    if request.method == "GET":
         serializer = StudentSerializer(students)
-        return Response(serializer.data, status=status.HTTP_200_OK)  
-    #-----------------------UPDATE a student by id -----------------------
-    elif request.method=="PUT":
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    # -----------------------UPDATE a student by id -----------------------
+    elif request.method == "PUT":
         # Getting the existing student object and updating it with new data
         serializer = StudentSerializer(students, data=request.data)
         if serializer.is_valid():
@@ -51,7 +52,7 @@ def student_detail(request, pk):
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    #----------------------- DELETE a student by id -----------------------
-    elif request.method=="DELETE":
+    # ----------------------- DELETE a student by id -----------------------
+    elif request.method == "DELETE":
         students.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

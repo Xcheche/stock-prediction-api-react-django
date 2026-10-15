@@ -8,14 +8,14 @@ from rest_framework import status
 from rest_framework import mixins
 from rest_framework import generics
 from config.paginations import CustomPagination
+
 # Create your views here.
 
 
+# =====CBV ONLY LIST VIEW=====#
 
-#=====CBV ONLY LIST VIEW=====#
 
 class EmployeeList(APIView):
-
 
     def get(self, request, format=None):
         employees = Employee.objects.all()
@@ -29,20 +29,17 @@ class EmployeeList(APIView):
         serializer = EmployeeSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data,
-                            status=status.HTTP_201_CREATED)
-          # if the data is not valid, return a 400 bad request response with the error details
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        # if the data is not valid, return a 400 bad request response with the error details
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
 
-
-    #Employee detail view to get, update or delete an employee
+    # Employee detail view to get, update or delete an employee
 
 
 class EmployeeDetail(APIView):
-   
+
     def get_object(self, pk):
-        # Returns an object instance that should 
+        # Returns an object instance that should
         # be used for detail views.
         try:
             return Employee.objects.get(pk=pk)
@@ -60,10 +57,8 @@ class EmployeeDetail(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
-          # if the data is not valid, return a 400 bad request response with the error details
+        # if the data is not valid, return a 400 bad request response with the error details
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-        
 
     def delete(self, request, pk, format=None):
         employee = self.get_object(pk)
@@ -71,11 +66,9 @@ class EmployeeDetail(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
+# ------------------------------------------------------------------------------------------------#
 
-
-#------------------------------------------------------------------------------------------------#
-
-#=====MIXINS ONLY LIST VIEW=====#
+# =====MIXINS ONLY LIST VIEW=====#
 """
 class EmployeeList(mixins.ListModelMixin,
                    mixins.CreateModelMixin,
@@ -108,13 +101,11 @@ class EmployeeDetail(mixins.RetrieveModelMixin,
         return self.update(request, *args, **kwargs)            
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
-"""        
-#------------------------------------------------------------------------------------------------------------------------------------------------------------#
+"""
+# ------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
 
-
-
-#=====Generics ONLY LIST VIEW=====#
+# =====Generics ONLY LIST VIEW=====#
 # class EmployeeList(generics.ListCreateAPIView):
 #     queryset = Employee.objects.all()
 #     serializer_class = EmployeeSerializer
@@ -122,7 +113,7 @@ class EmployeeDetail(mixins.RetrieveModelMixin,
 
 # #====Generics ONLY DETAIL VIEW=====#
 # class EmployeeDetail(generics.RetrieveUpdateDestroyAPIView):
-   
+
 #     queryset = Employee.objects.all()
-#     serializer_class = EmployeeSerializer    
+#     serializer_class = EmployeeSerializer
 #     lookup_field = 'pk'

@@ -5,5 +5,5 @@ from .models import Students
 class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Students
-        fields = ['id', 'student_id', 'name', 'major']
-        read_only_fields = ['id']
+        fields = ["id", "student_id", "name", "major"]
+        read_only_fields = ["id"]

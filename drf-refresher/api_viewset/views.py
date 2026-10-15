@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework import viewsets 
+from rest_framework import viewsets
 from rest_framework.response import Response
 from .models import Doctors
 from .serializers import DoctorsSerializer
@@ -8,8 +8,7 @@ from api_viewset.filters import DoctorsFilter
 # Create your views here.
 
 
-
-#View set
+# View set
 """
 # Non Model view set implementation
 class DoctorsViewSet(viewsets.ViewSet):
@@ -61,15 +60,15 @@ class DoctorsViewSet(viewsets.ViewSet):
         return Response(status=204)
 """
 
-#---------------------------------Model view set-----------------------------
+
+# ---------------------------------Model view set-----------------------------
 class DoctorsViewSet(viewsets.ModelViewSet):
     ##Model view set automatically provides implementations for list, create, retrieve, update, and destroy actions.
-    #Can filter, search, and order results using built-in features.
+    # Can filter, search, and order results using built-in features.
     queryset = Doctors.objects.all()
     serializer_class = DoctorsSerializer
     # Applying global filter ``This has a limitation as iexact or lower case filtering will not work with this approach. For more advanced filtering, use a custom filter class.``
     # filterset_fields = ['specialty']  # Allow filtering by name and specialization
-
 
     # Switched to using a custom filter class for more advanced filtering capabilities,located in drf-refresher/api_viewset/filters.py. This allows for more complex filtering logic and customization.
     filterset_class = DoctorsFilter  # Use the custom filter class for filtering

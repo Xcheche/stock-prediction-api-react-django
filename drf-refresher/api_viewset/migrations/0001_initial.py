@@ -7,20 +7,27 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Doctors',
+            name="Doctors",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('doctor_id', models.CharField(max_length=20)),
-                ('name', models.CharField(max_length=100)),
-                ('specialty', models.CharField(max_length=100)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("doctor_id", models.CharField(max_length=20)),
+                ("name", models.CharField(max_length=100)),
+                ("specialty", models.CharField(max_length=100)),
             ],
             options={
-                'unique_together': {('doctor_id', 'name')},
+                "unique_together": {("doctor_id", "name")},
             },
         ),
     ]

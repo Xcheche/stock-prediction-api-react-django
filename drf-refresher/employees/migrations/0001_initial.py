@@ -7,18 +7,43 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Employee',
+            name="Employee",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('employee_number', models.CharField(max_length=20)),
-                ('employee_name', models.CharField(max_length=100)),
-                ('employee_sex', models.CharField(choices=[('M', 'Male'), ('F', 'Female'), ('O', 'Other')], max_length=1)),
-                ('employee_race', models.CharField(choices=[('AS', 'Asian'), ('BL', 'Black'), ('WH', 'White'), ('HI', 'Hispanic'), ('OT', 'Other')], max_length=2)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("employee_number", models.CharField(max_length=20)),
+                ("employee_name", models.CharField(max_length=100)),
+                (
+                    "employee_sex",
+                    models.CharField(
+                        choices=[("M", "Male"), ("F", "Female"), ("O", "Other")],
+                        max_length=1,
+                    ),
+                ),
+                (
+                    "employee_race",
+                    models.CharField(
+                        choices=[
+                            ("AS", "Asian"),
+                            ("BL", "Black"),
+                            ("WH", "White"),
+                            ("HI", "Hispanic"),
+                            ("OT", "Other"),
+                        ],
+                        max_length=2,
+                    ),
+                ),
             ],
         ),
     ]
