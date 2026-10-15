@@ -23,3 +23,6 @@ you need to install django-filter package. You can install it by running the fol
 
 ## Custom filter is located in api_viewset/filters.py. You can use it by adding the following code in your views.py file:
 ## Global filter was manually applied there too
+
+## Searh filter is located in blog_nexted_serializer/views.py.
+## Ordering filter is located in blog_nexted_serializer/views.py. You can use it by adding the following code in your views.py file:
